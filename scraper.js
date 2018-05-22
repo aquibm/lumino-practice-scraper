@@ -60,7 +60,7 @@ const scrapePractices = $ => {
                 .text()
                 .trim()
 
-            const phoneNumber = $p('.contact')
+            const phoneNumber = $p('.contact a')
                 .text()
                 .trim()
 

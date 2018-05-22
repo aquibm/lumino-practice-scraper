@@ -4,9 +4,10 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "nodemon ./src/index.js",
-        "start": "node ./src/index.js",
-        "test": "ava --watch"
+        "dev": "nodemon index.js",
+        "start": "node index.js",
+        "test": "ava --watch",
+        "deploy": "now --public"
     },
     "author": "Aquib Master <aquibmaster@gmail.com>",
     "license": "MIT",
