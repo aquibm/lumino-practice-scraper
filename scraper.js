@@ -44,7 +44,41 @@ const scrapeLatLongs = $ => {
 }
 
 const scrapePractices = $ => {
-    return 'kek'
+    const practices = []
+
+    $('.practice-list > .row-fluid')
+        .children()
+        .each((idx, item) => {
+            const $p = cheerio.load(item)
+
+            const practiceName = $p('.media-heading a')
+                .text()
+                .trim()
+                .replace(' »', '')
+
+            const fullAddress = $p('.address')
+                .text()
+                .trim()
+
+            const phoneNumber = $p('.contact')
+                .text()
+                .trim()
+
+            practices.push({
+                practiceId: uuid(),
+                practiceName,
+                address: {
+                    streetAddress: fullAddress,
+                    suburb: '',
+                    city: '',
+                    postcode: '',
+                },
+                phoneNumber,
+                emailAddress: '',
+            })
+        })
+
+    return practices
 }
 
 exports.scrape = html => {
@@ -56,26 +90,11 @@ exports.scrape = html => {
     const practices = scrapePractices($)
     const latLongs = scrapeLatLongs($)
 
-    return [
-        {
-            practiceId: uuid(),
-            practiceName: 'wololo',
-            address: {
-                streetAddress: '85 Albert Street',
-                suburb: 'Auckland Central',
-                city: 'Auckland',
-                postcode: '1010',
-                latitude: -36.84786,
-                longitude: 174.76353,
-            },
-            region,
-            phoneNumber: '+64 9-373 4962',
-            emailAddress: 'proudmouth@lumino.co.nz',
-        },
-        {
-            name: 'debug',
-            latLongs,
-            practices,
-        },
-    ]
+    practices.forEach(practice => {
+        practice.address.latitude = latLongs[practice.practiceName].latitude
+        practice.address.longitude = latLongs[practice.practiceName].longitude
+        practice.region = region
+    })
+
+    return practices
 }
