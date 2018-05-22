@@ -1,0 +1,21 @@
+{
+    "name": "lumino-practice-scraper",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon ./src/index.js",
+        "start": "node ./src/index.js",
+        "test": "ava --watch"
+    },
+    "author": "Aquib Master <aquibmaster@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "cheerio": "^1.0.0-rc.2",
+        "uuid": "^3.2.1"
+    },
+    "devDependencies": {
+        "ava": "^0.25.0",
+        "nodemon": "^1.17.4"
+    }
+}
