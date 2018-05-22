@@ -19,7 +19,7 @@ app.get('/s/:island/:region', (req, res) => {
             const practices = scraper.scrape(html)
             res.json(practices)
         } catch (parseError) {
-            res.send(500, parseError.message)
+            res.status(500).send(parseError.toString())
         }
     })
 })

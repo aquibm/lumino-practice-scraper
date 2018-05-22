@@ -91,8 +91,10 @@ exports.scrape = html => {
     const latLongs = scrapeLatLongs($)
 
     practices.forEach(practice => {
-        practice.address.latitude = latLongs[practice.practiceName].latitude
-        practice.address.longitude = latLongs[practice.practiceName].longitude
+        const latlong = latLongs[practice.practiceName]
+
+        practice.address.latitude = (latlong && latlong.latitude) || 0
+        practice.address.longitude = (latlong && latlong.longitude) || 0
         practice.region = region
     })
 
